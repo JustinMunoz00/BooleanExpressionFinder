@@ -1,29 +1,34 @@
 import java.util.ArrayList;
 public class TruthTable{
     private ArrayList<String> variables = new ArrayList<String>();
-    private ArrayList<boolean[]> inputs = new ArrayList<boolean[]>();
+    private ArrayList<Boolean[]> inputs = new ArrayList<Boolean[]>();
     private ArrayList<Boolean> outputs = new ArrayList<Boolean>();
 
-    public TruthTable(boolean[][] in, boolean[] out, String[] vars){
+    public TruthTable(Boolean[][] in, boolean[] out, String[] vars){
         if (vars.length != in[0].length){
             System.out.println("Variables and inputs do not match");
             return;
         }
-        for (boolean[] x : in) inputs.add(x);
-        for (boolean y : in) inputs.add(y);
-        for (String z : in) inputs.add(z);
+        for (Boolean[] x : in) inputs.add(x);
+        for (boolean y : out) outputs.add(y);
+        for (String z : vars) variables.add(z);
     }
 
-    public String booleanExpression(){
+    public String bExpression(){
         String e = "";
         for (int i = 0; i < outputs.size(); i++){
-            if (i != 0) e += " + ";
             if (outputs.get(i)){
-                for (int k = 0; k < inputs.get(i).length; i++){
-                    if (outputs.get(k)) e+= variables.get(k);
+                e += " + ";
+                for (int k = 0; k < inputs.get(i).length; k++){
+                    if (inputs.get(i)[k]) e+= variables.get(k);
                     else e += variables.get(k)+"'";
                 }
             }
         }
+        return e.substring(3);
+    }
+
+    public String simplify(String str){
+        return "a";
     }
 }
